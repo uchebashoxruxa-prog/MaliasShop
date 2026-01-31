@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block main %}
+
+<main class="main">
+    <div class="contaiener" style="text-align:center;">
+        <img src="{% static 'img/success.jpg' %}" alt="" width="200" height="200" style="margin: 20px 0;">
+        <h4>The payment was successfully</h4>
+        <p>Our managers will contact with you soon</p>
+    </div>
+</main>
+
+{% endblock main %}

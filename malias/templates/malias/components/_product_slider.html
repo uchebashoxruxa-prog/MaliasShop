@@ -1,0 +1,57 @@
+{% load static %}
+
+
+<div class="col-md-5 col-sm-5 col-xs-12">
+    <div class="clear"></div>
+
+    <div class="product-gallery">
+        <div class="gallery-main">
+            <div class="main-image-container" id="main-image-container">
+                <img src="{{ product.first_photo }}"
+                     alt="{{ product.title }}"
+                     class="main-image"
+                     id="main-product-image"
+                     data-zoom-level="2">
+            </div>
+
+            <div class="zoom-lens" id="zoom-lens"></div>
+        </div>
+
+        <div class="zoom-window" id="zoom-window">
+            <div class="zoom-container">
+                <img src="{{ product.first_photo }}" alt="{{ product.title }}" class="zoom-image" id="zoom-image">
+            </div>
+        </div>
+
+        <div class="toch-prond-menu gallery-thumbnails">
+            <ul role="tablist" class="thumbnails-list" id="thumbnails-list">
+                <li role="presentation" class="thumbnail-item active" data-image-index="0">
+                    <a href="#" class="thumbnail-link" data-image-src="{{ product.first_photo }}">
+                        <div class="thumbnail-inner">
+                            <img src="{{ product.first_photo }}" alt="{{ product.title }}" class="thumbnail-img">
+                        </div>
+                    </a>
+                </li>
+
+                {% for img in product.images.all|slice:"1:" %}
+                <li role="presentation" class="thumbnail-item" data-image-index="{{ forloop.counter }}">
+                    <a href="#" class="thumbnail-link" data-image-src="{{ img.image.url }}">
+                        <div class="thumbnail-inner">
+                            <img src="{{ img.image.url }}" alt="{{ product.title }}" class="thumbnail-img">
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="product__slider-btns">
+        <button class="btn__prev" id="btn-prev">
+            <img src="{% static 'img/icons/backward_icon.svg' %}" alt="prev">
+        </button>
+        <button class="btn__next" id="btn-next">
+            <img src="{% static 'img/icons/forward_icon.svg' %}" alt="next">
+        </button>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{% load static %}
+{% load malias_tags %}
+{% get_categories as cats %}
+
+
+<div class="col-md-9 col-sm-9">
+    {% for product in products %}
+        {% include 'malias/components/_card.html' %}
+    {% endfor %}
+</div>
+
+{% include 'malias/components/_pagination.html' %}
+

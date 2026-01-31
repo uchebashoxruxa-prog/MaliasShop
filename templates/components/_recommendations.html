@@ -1,0 +1,74 @@
+{% load static %}
+{% load humanize %}
+{% load malias_tags %}
+{% get_hot_products as products %}
+
+<div class="col-md-3 col-sm-3">
+    <div class="hot-deals-area carosel-circle">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="area-title">
+                    <h3 class="title-group border-red gfont-1">Hot Deals</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="active-hot-deals">
+                {% for product in products %}
+                <div class="col-xs-12">
+                    <div class="single-hot-deals">
+                        <div class="hot-deals-photo">
+                            <a href="{{ product.get_absolute_url }}"><img src="{{ product.first_photo }}" alt="Product"></a>
+                        </div>
+                        <div class="count-down">
+                            <div class="timer">
+                                <div data-countdown="2026/02/28"></div>
+                            </div>
+                        </div>
+                        <div class="hot-deals-text">
+                            <h5><a href="{{ product.get_absolute_url }}" class="name-group">{{ product.title }}</a></h5>
+                            <div class="price-box">
+                                <span class="price gfont-2">${{ product.get_price|intcomma }}</span>
+                                {% if product.discount %}
+                                <span class="old-price gfont-2">${{ product.price|intcomma }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="small-product-area carosel-navigation">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="area-title">
+                    <h3 class="title-group gfont-1">Bestseller</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="active-bestseller sidebar">
+                <div class="col-xs-12">
+                    {% for product in order_products|slice:":4" %}
+                    <div class="single-product">
+                        <a href="{{ product.get_absolute_url }}">
+                            <img class="primary-img" src="{{ product.first_photo }}" alt="Product">
+                        </a>
+                        <div class="product-description">
+                            <h5><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h5>
+                            <div class="price-box">
+                                <span class="price">${{ product.get_price|intcomma }}</span>
+                                {% if product.discount %}
+                                <span class="old-price">${{ product.price|intcomma }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

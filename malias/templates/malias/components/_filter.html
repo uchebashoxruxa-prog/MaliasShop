@@ -1,0 +1,96 @@
+{% load static %}
+{% load malias_tags %}
+
+{% if colors %}
+<div class="filter-card">
+
+    <div class="filter-group">
+        <h6 class="filter-title">Price</h6>
+
+        <div class="d-flex gap-2">
+            <div class="dropdown w-100">
+                <button class="btn filter-btn dropdown-toggle w-100"
+                        type="button"
+                        data-toggle="dropdown">
+                    {% if request.GET.price_from %}
+                    ${{ request.GET.price_from }}
+                    {% else %}
+                    From
+                    {% endif %}
+                </button>
+
+                <div class="dropdown-menu w-100">
+                    {% for price in prices %}
+                    <a class="dropdown-item"
+                       href="?{% query_params price_from=price page=1 %}">
+                        ${{ price }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="dropdown w-100">
+                <button class="btn filter-btn dropdown-toggle w-100"
+                        type="button"
+                        data-toggle="dropdown">
+                    {% if request.GET.price_to %}
+                    ${{ request.GET.price_to }}
+                    {% else %}
+                    To
+                    {% endif %}
+                </button>
+
+                <div class="dropdown-menu w-100">
+                    {% for price in prices %}
+                    <a class="dropdown-item"
+                       href="?{% query_params price_to=price page=1 %}">
+                        ${{ price }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="accordion filter-accordion" id="filterAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#colorFilter">
+                    Color
+                </button>
+            </h2>
+            <div id="colorFilter" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                    {% for color in colors %}
+                    <a class="filter-link" href="?{% query_params color=color page=1 %}">
+                        {{ color }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        {% if models %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#modelFilter">
+                    Brand
+                </button>
+            </h2>
+            <div id="modelFilter" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    {% for model in models %}
+                    <a class="filter-link" href="?{% query_params model=model.slug page=1 %}">
+                        {{ model }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endif %}

@@ -1,0 +1,23 @@
+{% load static %}
+
+
+<div class="header-top hidden-xs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="top-link">
+                    <ul class="link">
+                        <li><a href="{% url 'profile' %}" class="{% if 'profile' in request.path %}active{% endif %}">
+                            <i class="fa fa-user"></i> My Account</a></li>
+                        <li><a href="{% url 'favourites' %}"><i
+                                class="fa fa-heart {% if 'favourites' in request.path %}active{% endif %}"></i> Wish
+                            List</a></li>
+                        {% if not user.is_authenticated %}
+                        <li><a href="{% url 'auth' %}"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

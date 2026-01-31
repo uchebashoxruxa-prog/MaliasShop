@@ -1,0 +1,43 @@
+{% load static %}
+{% load humanize %}
+
+{% if request.user.is_authenticated %}
+    {% load malias_tags %}
+    {% get_favourites user as favourites %}
+    {% get_cart_products user as cart_products %}
+{% endif %}
+
+<div class="col-md-7 col-sm-7 col-xs-12">
+    <h2 class="title-product">{{ product.title }}</h2>
+    <div class="about-toch-prond">
+        <hr/>
+        <p class="short-description">{{ product.description }}</p>
+        <hr/>
+        <span class="current-price">${{ product.get_price|intcomma }}</span>
+        {% if product.quantity %}
+        <span class="item-stock">Availability: <span class="text-stock">In Stock</span></span>
+        {% else %}
+        <span class="item-stock">Availability: <span class="text-stock">Out Of Stock</span></span>
+        {% endif %}
+    </div>
+    <br>
+    {% if product.quantity %}
+        {% if product not in cart_products or not cart_products %}
+            <a href="{% url 'action_cart' product.slug 'add' %}" type="submit" class="toch-button toch-add-cart">
+                <i class="fa fa-shopping-cart"></i>Add to Cart</a>
+        {% else %}
+            <a href="{% url 'action_cart' product.slug 'clear' %}" type="submit" class="toch-button toch-add-cart">
+                <i class="fa fa-shopping-cart"></i>Remove</a>
+        {% endif %}
+    {% else %}
+        <h5><i class="fa fa-shopping-cart"></i>Not Available</h5>
+    {% endif %}
+
+    {% if product not in favourites or not favourites %}
+        <a href="{% url 'action_favourite' product.slug %}#{{ product.slug }}" type="submit"
+       class="toch-button toch-wishlist"><i class="fa fa-heart-o"></i> wishlist</a>
+    {% else %}
+        <a href="{% url 'action_favourite' product.slug %}#{{ product.slug }}" type="submit"
+       class="toch-button toch-wishlist"><i class="fa fa-heart-o" style="color:red"></i> Remove</a>
+    {% endif %}
+</div>

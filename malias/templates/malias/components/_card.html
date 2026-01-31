@@ -1,0 +1,58 @@
+{% load static %}
+{% load humanize %}
+
+{% if request.user.is_authenticated %}
+    {% load malias_tags %}
+    {% get_favourites user as favourites %}
+    {% get_cart_products user as cart_products %}
+{% endif %}
+
+<div class="single-product">
+    <div class="label_new">
+        <span class="new">new</span>
+    </div>
+    <div class="sale-off">
+        <span class="sale-percent">{{ product.discount }}%</span>
+    </div>
+    <div class="product-img">
+        <a href="{{ product.get_absolute_url }}">
+            <img class="primary-img" src="{{ product.first_photo }}" width="70" alt="Product">
+        </a>
+    </div>
+    <div class="product-description">
+        <h5><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h5>
+        <div class="price-box">
+            <span class="price">${{ product.get_price|intcomma }}</span>
+            {% if product.discount %}
+            <span class="old-price">${{ product.price|intcomma }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="product-action">
+        <div class="button-group">
+            <div class="product-button">
+                {% if product.quantity %}
+                    {% if product not in cart_products or not cart_products %}
+                        <a href="{% url 'action_cart' product.slug 'add' %}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                    {% else %}
+                        <a href="{% url 'action_cart' product.slug 'clear' %}"><i class="fa fa-shopping-cart"></i>Remove</a>
+                    {% endif %}
+                {% else %}
+                    <a style="color: white;"><i class="fa fa-shopping-cart"></i>Not Available</a>
+                {% endif %}
+            </div>
+            <div class="product-button-2" id="{{ product.slug }}">
+                    {% if product not in favourites or not favourites %}
+                        <a href="{% url 'action_favourite' product.slug %}#{{ product.slug }}" data-toggle="tooltip"
+                           title="Wishlist"><i class="fa fa-heart-o"></i></a>
+                    {% else %}
+                        <a href="{% url 'action_favourite' product.slug %}#{{ product.slug }}" data-toggle="tooltip"
+                           title="Remove"><i class="fa fa-heart-o" style="color:red"></i></a>
+                    {% endif %}
+                <a href="#" class="modal-view" data-toggle="modal"
+                   data-target="#productModal-{{ product.id }}"><i class="fa fa-search-plus"></i></a>
+            </div>
+        </div>
+    </div>
+    {% include 'components/_modal_content.html' %}
+</div>

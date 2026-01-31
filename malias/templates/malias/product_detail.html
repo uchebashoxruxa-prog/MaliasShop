@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+<div class="container">
+    <div class="row">
+        {% include 'malias/components/_product_slider.html' %}<br><br>
+        {% include 'malias/components/_product_parameters.html' %}<br><br>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-sm-9">
+            <div class="comment_block my-4 text-light">
+                <h3>Commentaries: </h3>
+
+                <div class="comment_form mt-5">
+                    <form action="{% url 'save_comment' product.slug %}" method="post">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+
+                        {% if comment_form.text|length < 501 %}
+                            <button class="btn btn-success" type="submit">Send</button>
+                        {% endif %}
+
+                    </form>
+                </div>
+
+                <div class="comment_list mt-4" style="width: 600px;">
+                    {% for comment in comments %}
+                    <div class="comment p-2 rounded mb-4" style="background-color: rgb(217 217 217) !important;">
+                        <div class="d-flex justify-content-between">
+                            <div class="comment_info d-flex align-items-center">
+                                <img src="https://i.pinimg.com/originals/5c/c4/44/5cc4446d59be3bbc03df99b1ae60f0ce.jpg"
+                                     alt="" height="50" width='50' class="rounded-circle align-self-start">
+                                <div class="comment_text mx-3 text-black">
+                                    <h6>{{ comment.author }}<small class="mx-3 text-black">{{ comment.created_at }}</small></h6>
+                                    <p style="overflow-wrap: anywhere;">{{ comment.text }}</p>
+                                </div>
+                            </div>
+
+                            {% if request.user == comment.author %}
+                            <div class="comment_options d-flex">
+                                {% include 'malias/components/_confirm_comment.html' %}
+                                <a href="" class="text-black mx-2"
+                                   data-toggle="modal"
+                                   data-target="#exampleModalComment-{{ comment.pk }}" style="border: none;">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+
+                                <a class="text-black mx-2" data-bs-toggle="collapse"
+                                   href="#collapseExample-{{ comment.pk }}"
+                                   role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="collapse mt-3" id="collapseExample-{{ comment.pk }}">
+                            <form action="{% url 'comment_update' comment.pk %}" method="post">
+                                {% csrf_token %}
+
+                                <p>
+                                        <textarea name="text" cols="40" rows="10"
+                                                  class="form-control contact__section-input"
+                                                  style="height: 60px;"
+                                                  required="" id="id_text">{{ comment.text }}</textarea>
+                                </p>
+
+                                <button class="btn btn-primary" type="submit">Change</button>
+                            </form>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if same_products %}
+            <div class="mt-5">
+                <h2 class="products__title">Recommended Products</h2>
+                <div class="products__content">
+                    {% for product in same_products %}
+                    {% include 'malias/components/_card.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock main %}

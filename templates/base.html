@@ -1,0 +1,58 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ title }}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'components/_style.html' %}
+
+</head>
+<body>
+
+{% block header %}
+<header class="header-area">
+    {% include 'components/_header_top.html' %}
+    {% include 'components/_header_middle.html' %}
+    {% include 'components/_main_menu.html' %}
+</header>
+{% endblock header %}
+
+{% block main %}
+<div class="category-slider-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% include 'components/_categories_menu.html' %}
+            </div>
+            <div class="col-md-9">
+                {% include 'components/_slider.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="page-content">
+    <div class="container">
+        <div class="row">
+            {% include 'components/_recommendations.html' %}
+            {% include 'components/_products.html' %}
+        </div>
+    </div>
+</section>
+{% endblock main %}
+
+{% block footer %}
+<br><br>
+<footer class="footer-area">
+    {% include 'components/_brands.html' %}
+    {% include 'components/_subscribe.html' %}
+    {% include 'components/_footer.html' %}
+    {% include 'components/_copyright.html' %}
+</footer>
+
+{% endblock footer %}
+
+{% include 'components/_script.html' %}
+</body>
+</html>

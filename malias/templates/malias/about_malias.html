@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+
+<section class="page-content">
+    <div class="about-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="f-title text-center">
+                        <h3 class="title text-uppercase">About Us</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                    <div class="about-page-cntent">
+                        <h3>Founded by a team of tech lovers</h3>
+                        <p>Discover a modern destination for technology enthusiasts, offering the latest and most
+                            popular
+                            smartphones, smartwatches, laptops, cameras, and other cutting-edge gadgets from top global
+                            brands.</p>
+                        <blockquote>
+                            <p>Only genuine products with guaranteed quality are available—featuring up-to-date models
+                                with powerful performance and sleek designs.</p>
+                        </blockquote>
+                        <p>These devices help you work, create, stay active,
+                            and stay connected with the world. A welcoming atmosphere, expert assistance, and
+                            competitive
+                            prices make it the ideal place for tech shopping.</p>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    <div class="img-element">
+                        <img alt="banner1" src="{% static 'img/about/main.jpeg' %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End About-Area -->
+    <!-- Start Our-Team -->
+    <div class="our-team">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="f-title text-center">
+                        <h3 class="title text-uppercase">Meet the team</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div class="item-team text-center">
+                        <div class="team-info">
+                            <div class="team-img">
+                                <img alt="Team" class="img-responsive" src="{% static 'img/about/1.webp' %}">
+                                <div class="mask">
+                                    <div class="mask-inner">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Havier Macherano</h4>
+                        <h5>Developer</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="item-team text-center">
+                        <div class="team-info">
+                            <div class="team-img">
+                                <img alt="Team" class="img-responsive" src="{% static 'img/about/2.webp' %}">
+                                <div class="mask">
+                                    <div class="mask-inner">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Mika Biglia</h4>
+                        <h5>Data Analyst</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="item-team text-center">
+                        <div class="team-info">
+                            <div class="team-img">
+                                <img alt="Team" class="img-responsive" src="{% static 'img/about/3.jpg' %}">
+                                <div class="mask">
+                                    <div class="mask-inner">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Anzo Perez</h4>
+                        <h5>Designer</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="item-team text-center">
+                        <div class="team-info">
+                            <div class="team-img">
+                                <img alt="Team" class="img-responsive" src="{% static 'img/about/4.jpg' %}">
+                                <div class="mask">
+                                    <div class="mask-inner">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Martin Demichelis</h4>
+                        <h5>Manager</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock main %}

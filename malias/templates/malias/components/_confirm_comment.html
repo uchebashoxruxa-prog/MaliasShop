@@ -1,0 +1,18 @@
+<div class="modal fade" id="exampleModalComment-{{ comment.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Are you sure to delete this comment???</h1>
+                <button type="button" class="btn-close bg-light" data-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body text-center d-flex justify-content-center gap-3">
+                <a class="btn btn-secondary" data-dismiss="modal" style="width: 100px">No</a>
+                <form action="{% url 'comment_delete' comment.pk %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" style="width: 100px">Yes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

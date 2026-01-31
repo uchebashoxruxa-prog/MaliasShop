@@ -1,0 +1,31 @@
+{% load static %}
+{% load malias_tags %}
+{% get_categories as cats %}
+
+
+<div class="left-category-menu hidden-sm hidden-xs">
+    <div class="left-product-cat">
+        <div class="category-heading">
+            <h2>categories</h2>
+        </div>
+        <div class="category-menu-list">
+            <ul>
+                {% for cat in cats %}
+                <li class="arrow-plus">
+                    <a href="{{ cat.get_absolute_url }}">
+                        <img src="{{ cat.get_icon }}" width="30" height="30" alt=""> {{ cat.title }}
+                    </a>
+                    <div class="cat-left-drop-menu">
+                        {% for model in cat.models.all %}
+                        <div class="cat-left-drop-menu-left">
+                            <a href="{% url 'model_products' category_slug=cat.slug model_slug=model.slug %}">
+                                {{ model.title }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
